@@ -58,7 +58,8 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+# For django-distill to build we want to commit the SQLite database
+#db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -127,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Project
+distill_site/static
