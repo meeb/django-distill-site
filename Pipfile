@@ -9,6 +9,10 @@ django-distill = "*"
 django-sass-processor = "*"
 libsass = "*"
 django-compressor = "*"
+requests = "*"
+feedparser = "*"
+python-dateutil = "*"
+markdown = "*"
 
 [dev-packages]
 

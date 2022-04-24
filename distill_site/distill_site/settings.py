@@ -100,3 +100,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+GITHUB_REPO_USERNAME = 'meeb'
+GITHUB_REPO_NAME = 'django-distill'
+GITHUB_USERNAME = ''
+GITHUB_ACCESS_TOKEN = ''
+
+
+PYPI_PACKAGE = 'django-distill'
+
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    import sys
+    sys.stdout.write(f'Failed to import from local_settings.py: {e}\n')
+    sys.exit(1)

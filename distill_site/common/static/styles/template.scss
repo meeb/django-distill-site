@@ -7,3 +7,134 @@ body {
     font-size: $font_size;
     color: $text_colour;
 }
+
+strong {
+    font-family: $font_family_bold;
+    font-weight: bold;
+}
+
+a {
+    color: $link_colour;
+    text-decoration: none;
+    border-bottom: 1px $link_underscore_colour dotted;
+    &:hover {
+        color: $link_hover_colour;
+    }
+    &.button {
+        text-decoration: none;
+        text-align: left;
+        justify-content: left;
+        box-shadow: 3px 3px 7px $hero_text_shadow_colour, 
+                    -3px -3px 7px $hero_text_shadow_colour;
+        &:hover {
+            cursor: pointer;
+            color: $hero_button_text_hover_colour;
+            background-color: $hero_button_background_hover_colour;
+            
+        }
+    }
+}
+
+
+nav.main-nav {
+    background-color: $nav_background_colour;
+    .navbar-brand {
+        a {
+            background-color: $nav_logo_background_colour;
+            &:hover {
+                background-color: $nav_logo_background_hover_colour;
+            }
+        }
+        h1 {
+            font-family: $font_family_bold;
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $nav_link_colour;
+        &:hover {
+            color: $nav_link_hover_colour;
+            background-color: $nav_link_background_hover_colour;
+        }
+    }
+    i {
+        font-size: 0.95rem;
+    }
+}
+
+#content {
+    .triangles {
+        background-image: url(/static/images/triangles.svg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-bottom: 10px $nav_border_colour solid;
+        
+    }
+    section {
+        padding: 3rem 0 1rem 0;
+        p {
+            padding-bottom: 2rem;
+        }
+    }
+    section:not(:last-child) {
+        border-bottom: 1px $content_section_border_colour solid;
+    }
+    section.hero {
+        border: 0;
+        padding: 0;
+        .title, .subtitle {
+            color: $hero_text_colour;
+            text-shadow: 3px 3px 7px $hero_text_shadow_colour, 
+                         -3px -3px 7px $hero_text_shadow_colour;
+        }
+        .title {
+            padding: 0;
+            margin: 0;
+        }
+        .subtitle {
+            padding-top: 2rem;
+            margin: 0;
+        }
+    }
+    .icon-field {
+        i {
+            z-index: 1;
+            position: absolute;
+            padding: 12px 12px 12px 18px;
+            color: $content_install_icon_colour;
+            text-align: left;
+         }
+    }
+    input.install-copypaste {
+        border: 1px $content_code_border_colour solid;
+        color: $text_colour;
+        font-family: $font_family_bold;
+        padding-left: 40px;
+        &:hover {
+            cursor: text;
+        }
+    }
+    pre {
+        background-color: $content_code_background_colour;
+        border: 1px $content_code_border_colour solid;
+        border-radius: 6px;
+        code {
+            color: $content_code_text_colour;
+        }
+        margin-bottom: 2rem;
+    }
+}
+
+
+footer {
+    margin-top: 2rem;
+    background-color: $footer_background_colour;
+    border-top: 10px $footer_border_colour solid;
+    color: $footer_text_colour;
+    text-align: center;
+    padding: 3rem 3rem;
+    strong {
+        color: $footer_text_colour;
+    }
+}

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>prolixy</title>
-    <meta name="description" content="prolixy">
+    <title>Django Distill</title>
+    <meta name="description" content="django-distill, a static site generator for Django">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" href="{% sass_src 'styles/distill.scss' %}">
@@ -12,9 +12,38 @@
 
   <body>
 
+    <nav class="navbar main-nav" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://django-distill.com/">
+          <h1>django-distill</h1>
+        </a>
+      </div>
+      <a class="navbar-item is-expanded" href="{% url 'content:index' %}">
+        <i class="fa-solid fa-fw fa-home"></i>&nbsp;Home
+      </a>
+      <a class="navbar-item is-expanded" href="{% url 'content:install' %}">
+        <i class="fa-solid fa-fw fa-file-import"></i>&nbsp;Install
+      </a>
+      <a class="navbar-item is-expanded" href="{% url 'content:integration' %}">
+        <i class="fa-solid fa-fw fa-book-open-reader"></i>&nbsp;Integration
+      </a>
+      <a class="navbar-item is-expanded" href="{% url 'content:deployment' %}">
+        <i class="fa-solid fa-fw fa-cloud-arrow-up"></i>&nbsp;Deployment
+      </a>
+      <a class="navbar-item is-expanded" href="{% url 'content:development' %}">
+        <i class="fa-solid fa-fw fa-code"></i>&nbsp;Development
+      </a>
+    </nav>
+
   <div id="content">
 {% block content %}{% endblock %}
   </div>
+
+  <footer>
+    All content &copy;{% now 'Y' %} the <strong>django-distill</strong> project.
+    &quot;Django&quot; is a registered trademark of the Django Software Foundation.
+    <strong>django-distill</strong> is an independant project and not part of the Django Software Foundation.
+  </footer>
 
   </body>
 </html>

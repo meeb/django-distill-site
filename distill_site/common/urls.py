@@ -2,6 +2,9 @@ from django_distill import distill_path
 from .views import favicon_view, robots_view, _headers_view, error404_view
 
 
+app_name = 'common'
+
+
 urlpatterns = [
 
     distill_path('favicon.ico',
