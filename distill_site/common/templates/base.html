@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Django Distill</title>
+    <title>{% block page_title %}Static site generator for Django{% endblock %} - Django Distill</title>
     <meta name="description" content="django-distill, a static site generator for Django">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
@@ -30,7 +30,7 @@
       <a class="navbar-item is-expanded" href="{% url 'content:deployment' %}">
         <i class="fa-solid fa-fw fa-cloud-arrow-up"></i>&nbsp;Deployment
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:development' %}">
+      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='development' %}">
         <i class="fa-solid fa-fw fa-code"></i>&nbsp;Development
       </a>
     </nav>

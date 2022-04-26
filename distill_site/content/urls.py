@@ -1,6 +1,6 @@
 from django_distill import distill_path
 from .views import (index_view, install_view, integration_view,
-                    deployment_view, development_view)
+                    deployment_view, yamlmd_page_view)
 
 
 app_name = 'content'
@@ -25,8 +25,8 @@ urlpatterns = [
                  deployment_view,
                  name='deployment'),
 
-    distill_path('development.html',
-                 development_view,
-                 name='development'),
+    distill_path('<slug:page_name>.html',
+                 yamlmd_page_view,
+                 name='yamlmd_page'),
 
 ]

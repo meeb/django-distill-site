@@ -33,6 +33,9 @@ a {
             
         }
     }
+    &.image {
+        border: 0;
+    }
 }
 
 
@@ -63,6 +66,9 @@ nav.main-nav {
 }
 
 #content {
+    .page-top-border {
+        border-top: 10px $footer_border_colour solid;
+    }
     .triangles {
         background-image: url(/static/images/triangles.svg);
         background-size: cover;
@@ -72,7 +78,7 @@ nav.main-nav {
         
     }
     section {
-        padding: 3rem 0 1rem 0;
+        padding: 3rem 1rem 1rem 1rem;
         p {
             padding-bottom: 2rem;
         }
@@ -123,6 +129,9 @@ nav.main-nav {
             color: $content_code_text_colour;
         }
         margin-bottom: 2rem;
+    }
+    .is-flex {
+        display: flex;
     }
 }
 

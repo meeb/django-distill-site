@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ header.page_title }}{% endblock %}
+
+{% block content %}
+<div class="page-top-border">
+  <section class="container">
+    <h1 class="is-size-1-desktop is-size-2-tablet is-size-3-mobile">{{ header.page_title }}</h1>
+  </section>
+  <section class="container">
+    {{ content|safe }}
+  </sction>
+</div>
+{% endblock %}

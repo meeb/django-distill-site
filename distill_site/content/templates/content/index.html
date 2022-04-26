@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block page_title %}Static site generator for Django{% endblock %}
+
 {% block content %}
 
 <div class="triangles">
@@ -97,6 +99,24 @@
         <a href="{% url 'content:deployment' %}"><i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment documentation</a>.
       </div>
     </div>
+  </div>
+</section>
+
+<section class="container">
+  <h3 class="title"><i class="fa-solid fa-fw fa-star"></i>&nbsp;{{ num_stargazers }} Stargazers</h3>
+  <div class="block">
+    <div class="columns is-multiline is-flex">
+      {% for stargazer in stargazers %}
+      <div class="column is-1-fullhd is-1-desktop is-1-widescreen is-1-tablet is-2-mobile">
+        <a href="{{ stargazer.url }}" title="GitHub profile for {{ stargazer.name }}" class="image is-square" rel="nofollow">
+          <img src="{{ stargazer.avatar }}" alt="GitHub avatar for {{ stargazer.name }}">
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="block">
+    <a href="https://github.com/meeb/django-distill/stargazers" rel="nofollow"><i class="fa-brands fa-github"></i> ... and hundreds more on GitHub</a>
   </div>
 </section>
 

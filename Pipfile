@@ -13,6 +13,7 @@ requests = "*"
 feedparser = "*"
 python-dateutil = "*"
 markdown = "*"
+pyyaml = "*"
 
 [dev-packages]
 
