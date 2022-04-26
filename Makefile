@@ -24,3 +24,8 @@ clean:
 
 test:
 	cd distill_site && $(python) manage.py test --verbosity=2 && cd ..
+
+
+sync:
+	$(python) distill_site/manage.py sync_pypi_releases
+	$(python) distill_site/manage.py sync_github_stargazers

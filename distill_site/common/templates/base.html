@@ -21,13 +21,13 @@
       <a class="navbar-item is-expanded" href="{% url 'content:index' %}">
         <i class="fa-solid fa-fw fa-home"></i>&nbsp;Home
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:install' %}">
+      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='install' %}">
         <i class="fa-solid fa-fw fa-file-import"></i>&nbsp;Install
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:integration' %}">
+      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='integration' %}">
         <i class="fa-solid fa-fw fa-book-open-reader"></i>&nbsp;Integration
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:deployment' %}">
+      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='deployment' %}">
         <i class="fa-solid fa-fw fa-cloud-arrow-up"></i>&nbsp;Deployment
       </a>
       <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='development' %}">

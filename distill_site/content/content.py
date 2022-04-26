@@ -1,5 +1,6 @@
 import yaml
 from markdown import markdown
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.http import Http404
 from common.utils import lowercase_ascii_only
@@ -36,4 +37,26 @@ def static_page_render(name):
     if splitter not in d:
         raise Exception(f'Malformed page content (no ---): {name} ({path})')
     header_str, content_str = d.split(splitter, 1)
-    return yaml.safe_load(header_str.strip()), markdown(content_str.strip())
+    header = yaml.safe_load(header_str.strip())
+    plain_html = markdown(content_str.strip())
+    content = add_bulma_classes(plain_html)
+    return header, content
+
+
+_h1_classes = [
+    'title',
+    'is-size-3-desktop',
+    'is-size-4-tablet',
+    'is-size-5-mobile'
+]
+
+
+def add_bulma_classes(html):
+    """
+        Adds Bulma CSS framework classes to an HTML document. Used to add
+        default CSS classes to HTML rendered automatically from Markdown.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    for tag in soup.find_all('h1'):
+        tag['class'] = tag.get('class', []) + _h1_classes
+    return str(soup)

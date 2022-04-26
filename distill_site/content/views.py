@@ -4,12 +4,16 @@ from content.models import Release, Stargazer
 
 
 def index_view(request):
+    num_stargazers_to_show = 144  # divisible by 12 looks nicer in columns
+    num_stargazers = Stargazer.objects.all().count()
     return render(request, 'content/index.html', context={
         'intro': markdown_render('index-intro'),
         'how_it_works': markdown_render('index-how-it-works'),
         'latest_release': Release.get_latest(),
-        'num_stargazers': Stargazer.objects.all().count(),
-        'stargazers': Stargazer.objects.order_by('?')[:144]
+        'num_stargazers': num_stargazers,
+        'num_stargazers_to_show': num_stargazers_to_show,
+        'num_stargazers_remaining': num_stargazers - num_stargazers_to_show,
+        'stargazers': Stargazer.objects.order_by('?')[:num_stargazers_to_show]
     })
 
 

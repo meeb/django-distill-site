@@ -2,7 +2,43 @@ page_title: Installation
 
 ---
 
-This page covers how to add **django-distill** to your pro
+This page covers how to add **django-distill** to your Django project.
+
 
 # Step 1: Have a Django project
 
+**django-distill** is an add-on library to Django, so you must already have a
+Django project with working URLs to add it to. This guide assumes you already
+know some basics around how to develop sites with Django. If not, please read
+the excellent [getting started with Django](https://www.djangoproject.com/start/)
+documentation.
+
+Once you have an existing Django with some working pages you install
+**django-distill**.
+
+
+# Step 2: Install django-distill
+
+The easiest way to install **django-distill** is from PyPI via `pip`:
+
+    $ pip install django-distill
+
+You can use Python virtual environments (venvs), pipenv, poetry or whatever
+Python package manager setup works for you.
+
+
+# Step 3: Add to your project
+
+Add `django_distill` to your `INSTALLED_APPS` in the `settings.py` if your
+Django project:
+
+    INSTALLED_APPS = [
+        # ... Django project apps here ...
+        'django_distill',
+        # ... local site apps here ...
+    ]
+
+That's it!
+
+Now **django-distill** is added to your Django project you can begin with
+[<i class="fa-solid fa-fw fa-book-open-reader"></i> integration](/integration.html).

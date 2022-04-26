@@ -33,7 +33,7 @@ class Command(BaseCommand):
     def save_stargazer(self, stargazer):
         username = stargazer.get('login')
         userid = stargazer.get('id')
-        url = stargazer.get('url')
+        url = stargazer.get('html_url')
         avatar = stargazer.get('avatar_url')
         if not username or not userid or not url or not avatar:
             self.stderr.write(f'Skipping malformed stargazer: {stargazer}')

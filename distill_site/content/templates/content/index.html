@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="triangles">
-  <section class="hero container">
+  <section class="hero container side-pad">
     <div class="hero-body">
       <div class="columns">
         <div class="column is-two-thirds is-full-mobile">
@@ -33,7 +33,7 @@
   {{ intro|safe }}
 </section>
 
-<section class="container">
+<section class="container side-pad">
   <div class="columns">
     <div class="column is-two-thirds is-full-mobile">
       <h2 class="title">How it works</h2>
@@ -66,21 +66,21 @@
           <h2 class="title"><i class="fa-solid fa-question"></i>&nbsp;Did you know</h2>
           This website is powered by <strong>Django</strong>, uses <strong>django-distill</strong>
           and is automatically deployed as a static site to Cloudflare pages! This site is open source and you
-          can view it on <a href="https://github.com/meeb/django-distill-site/"><i class="fa-brands fa-github"></i> GitHub</a>.
+          can <a href="https://github.com/meeb/django-distill-site/"><i class="fa-brands fa-github"></i> view it on GitHub</a>.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="container">
+<section class="container side-pad">
   <div class="columns">
     <div class="column is-one-third is-full-mobile">
       <h3 class="title"><i class="fa-solid fa-fw fa-file-import"></i>&nbsp;Install</h3>
       <div class="block">
         For the step by step guide on how to install <strong>django-distill</strong> into
         your Django project, read the
-        <a href="{% url 'content:install' %}"><i class="fa-solid fa-fw fa-file-import"></i> installation documentation</a>.
+        <a href="{% url 'content:yamlmd_page' page_name='install' %}"><i class="fa-solid fa-fw fa-file-import"></i> installation documentation</a>.
       </div>
     </div>
     <div class="column is-one-third is-full-mobile">
@@ -88,7 +88,7 @@
       <div class="block">
         Installed <strong>django-distill</strong> into your Django project? You can start using
         the full set of static site generation features, read the
-        <a href="{% url 'content:integration' %}"><i class="fa-solid fa-fw fa-book-open-reader"></i> integration documentation</a>.
+        <a href="{% url 'content:yamlmd_page' page_name='integration' %}"><i class="fa-solid fa-fw fa-book-open-reader"></i> integration documentation</a>.
       </div>
     </div>
     <div class="column is-one-third is-full-mobile">
@@ -96,19 +96,19 @@
       <div class="block">
         Once you've wrapped your URLs with <strong>django-distill</strong> you can deploy
         your static site! Read the
-        <a href="{% url 'content:deployment' %}"><i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment documentation</a>.
+        <a href="{% url 'content:yamlmd_page' page_name='deployment' %}"><i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment documentation</a>.
       </div>
     </div>
   </div>
 </section>
 
-<section class="container">
+<section class="container side-pad">
   <h3 class="title"><i class="fa-solid fa-fw fa-star"></i>&nbsp;{{ num_stargazers }} Stargazers</h3>
   <div class="block">
     <div class="columns is-multiline is-flex">
       {% for stargazer in stargazers %}
       <div class="column is-1-fullhd is-1-desktop is-1-widescreen is-1-tablet is-2-mobile">
-        <a href="{{ stargazer.url }}" title="GitHub profile for {{ stargazer.name }}" class="image is-square" rel="nofollow">
+        <a href="{{ stargazer.url }}" title="GitHub profile for {{ stargazer.name }}" class="image is-square" rel="nofollow" target="_blank">
           <img src="{{ stargazer.avatar }}" alt="GitHub avatar for {{ stargazer.name }}">
         </a>
       </div>
@@ -116,7 +116,7 @@
     </div>
   </div>
   <div class="block">
-    <a href="https://github.com/meeb/django-distill/stargazers" rel="nofollow"><i class="fa-brands fa-github"></i> ... and hundreds more on GitHub</a>
+    <a href="https://github.com/meeb/django-distill/stargazers" rel="nofollow"><i class="fa-brands fa-github"></i> ... and {{ num_stargazers_remaining }} more on GitHub</a>
   </div>
 </section>
 
