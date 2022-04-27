@@ -23,12 +23,13 @@ $link_underscore_colour: $palette_middle;
 
 $nav_background_colour: $palette_dark;
 $nav_logo_background_colour: $palette_primary;
-$nav_logo_background_hover_colour: $palette_middle;
+$nav_logo_background_hover_colour: $palette_primary;
 $nav_link_colour: $colour_white;
 $nav_link_hover_colour: $colour_white;
 $nav_link_background_hover_colour: $palette_primary;
-$nav_border_colour: $palette_light;
+$nav_border_colour: $palette_middle;
 
+$hero_background_colour: $palette_primary;
 $hero_text_colour: $colour_white;
 $hero_text_shadow_colour: $palette_middle;
 $hero_button_text_hover_colour: $colour_white;
@@ -41,6 +42,7 @@ $content_code_border_colour: $palette_light;
 $content_code_text_colour: $colour_black;
 $content_install_icon_colour: $palette_light;
 $content_side_note_header_colour: $palette_primary;
+$content_text_shadow_colour: $palette_light;
 
 $footer_background_colour: $palette_dark;
 $footer_border_colour: $palette_light;

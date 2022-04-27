@@ -26,8 +26,8 @@ a {
         text-decoration: none;
         text-align: left;
         justify-content: left;
-        box-shadow: 3px 3px 7px $hero_text_shadow_colour, 
-                    -3px -3px 7px $hero_text_shadow_colour;
+        box-shadow: 3px 3px 7px $content_text_shadow_colour, 
+                    -3px -3px 7px $content_text_shadow_colour;
         &:hover {
             cursor: pointer;
             color: $hero_button_text_hover_colour;
@@ -37,6 +37,15 @@ a {
     }
     &.image {
         border: 0;
+    }
+}
+
+.hero {
+    a {
+        &.button {
+            box-shadow: 3px 3px 7px $hero_text_shadow_colour, 
+                        -3px -3px 7px $hero_text_shadow_colour;
+        }
     }
 }
 
@@ -86,6 +95,7 @@ section.hero {
 }
 
 .triangles {
+    background-color: $hero_background_colour;
     background-image: url(/static/images/triangles.svg);
     background-size: cover;
     background-position: center;

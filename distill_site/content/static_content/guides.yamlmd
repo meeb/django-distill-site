@@ -2,4 +2,10 @@ page_title: Usage Guides
 
 ---
 
-guides
+This page links to detailed step by step guides on how to deploy the static
+output of a Django website using **django-distill** to common publishing
+targets using automated, continuous deployment.
+
+<a class="button is-medium" href="{% url 'content:yamlmd_page' page_name='guide-aws-s3' %}"><i class="fa-brands fa-fw fa-aws"></i>&nbsp;Deploy to an AWS S3 bucket</a>
+
+<a class="button is-medium" href="{% url 'content:yamlmd_page' page_name='guide-cloudflare-pages' %}"><i class="fa-brands fa-fw fa-cloudflare"></i>&nbsp;Deploy to Cloudflare Pages</a>

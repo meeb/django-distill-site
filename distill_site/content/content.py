@@ -3,7 +3,9 @@ from markdown import markdown
 from bs4 import BeautifulSoup
 from django.conf import settings
 from django.http import Http404
+from django.template import Template, Context
 from common.utils import lowercase_ascii_only
+
 
 
 _app = 'content'
@@ -22,7 +24,7 @@ def markdown_render(name):
     return markdown(d)
 
 
-def static_page_render(name):
+def static_page_render(name, context={}):
     """
         'yamlmd' files are static content files with a YAML header, then a
         normal --- break, then markdown content.
@@ -40,7 +42,9 @@ def static_page_render(name):
     header = yaml.safe_load(header_str.strip())
     plain_html = markdown(content_str.strip())
     content = add_bulma_classes(plain_html)
-    return header, content
+    django_rendered_html = Template(content)
+    django_template_context = Context(context)
+    return header, django_rendered_html.render(django_template_context)
 
 
 _extra_css_classes = {
