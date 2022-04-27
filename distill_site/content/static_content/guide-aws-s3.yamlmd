@@ -2,4 +2,86 @@ page_title: Deploy Django to an AWS S3 bucket
 
 ---
 
-S3
+This page is a step by step guide on how to deploy the (static output of) a
+Django project to an Amazon AWS S3 bucket. All of these guides assume you
+have followed the
+[<i class="fa-solid fa-fw fa-file-import"></i> installation](/install.html) and
+[<i class="fa-solid fa-fw fa-puzzle-piece"></i> integration](/integration.html)
+steps to the point where you have a Django site that can be distilled locally
+and the following command works correctly to build a static copy of your site
+into a directory:
+
+    $ ./manage.py distill-local [optional /path/to/export/directory]
+
+
+# Step 1: Set up the S3 bucket
+
+Mostly outside the scope of this guide. The first step is to have an AWS
+account, create an S3 bucket as the name of your website and set up access
+details. You need the bucket name, AWS access key and AWS secret key (and
+optionally the AWS region) for the next stop.
+
+
+# Step 2: Set up DNS
+
+You need to point a domain to your S3 bucket so that you can publicly access
+the S3 bucket as a website. This is "static website hosting on S3".
+
+
+# Step 2: Set up your target
+
+Open your projects `settings.py` and add in the following using the details
+created in step 1:
+
+    DISTILL_PUBLISH = {
+        'default': {
+            'ENGINE': 'django_distill.backends.amazon_s3',
+            'PUBLIC_URL': 'http://www.some-public-website.example/',
+            'ACCESS_KEY_ID': 'your-bucket-access-key-here',
+            'SECRET_ACCESS_KEY': 'your-bucket-secret-key-here',
+            'BUCKET': 'www.some-public-website.example',
+        },
+    }
+
+
+# Step 3: test
+
+You can now use the `distill-test-publish` command to test your publish target
+settings.
+
+    $ ./manage.py distill-test-publish
+
+This command will attempt to connect to your S3 bucket with your supplied
+credentials, access the bucket, and write a randomly named file to the
+bucket (for example `/rxO9wier.html`) then attempt to verify that the public
+URL works at `https://www.some-public-website.example/rxO9wier.html` and that
+the hash of the file is as expected. Once the test is complete the test file
+is deleted.
+
+If this command succeeds, your setup is verified and you can deploy your static
+site!
+
+
+# Step 4: publish
+
+Run the publish command:
+
+    $ ./manage.py distill-publish
+
+This command will build your site to a temporary local directory, then list
+all files in the remote bucket, compare them with the local directory and
+upload any files that are different while deleting any remove files which have
+been removed.
+
+Once the `distill-publish` command completes your static, Django-powered
+website should be live!
+
+## <i class="fa-solid fa-triangle-exclamation"></i> Multi-part file warning!
+
+The `distill-publish` command checks if remote files have changed by checking
+the local and remote file hashes. This feature uses the S3 `etag` value which
+is an MD5 hash. This works well for most content, however any files which are
+large enough to be split into multi-part uploads (typically tens of megabytes)
+may be uploaded every time you run `distill-publish`. This will still work as
+expected, however if your static content contains many large files you may end
+up uploading large files even if they haven't changed.
