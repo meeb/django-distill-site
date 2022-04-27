@@ -14,21 +14,21 @@
 
     <nav class="navbar main-nav" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://django-distill.com/">
+        <a class="navbar-item" href="{% url 'content:index' %}">
           <h1>django-distill</h1>
         </a>
       </div>
-      <a class="navbar-item is-expanded" href="{% url 'content:index' %}">
-        <i class="fa-solid fa-fw fa-home"></i>&nbsp;Home
-      </a>
       <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='install' %}">
         <i class="fa-solid fa-fw fa-file-import"></i>&nbsp;Install
       </a>
       <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='integration' %}">
-        <i class="fa-solid fa-fw fa-book-open-reader"></i>&nbsp;Integration
+        <i class="fa-solid fa-fw fa-puzzle-piece"></i>&nbsp;Integration
       </a>
       <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='deployment' %}">
         <i class="fa-solid fa-fw fa-cloud-arrow-up"></i>&nbsp;Deployment
+      </a>
+      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='guides' %}">
+        <i class="fa-solid fa-fw fa-book-open"></i>&nbsp;Guides
       </a>
       <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='development' %}">
         <i class="fa-solid fa-fw fa-code"></i>&nbsp;Development

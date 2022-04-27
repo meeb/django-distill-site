@@ -2,6 +2,30 @@ page_title: Development
 
 ---
 
-# Development
+Development of **django-distill** currently takes place on GitHub.
 
-this is some content
+<a class="button is-large" href="https://github.com/meeb/django-distill/"><i class="fa-brands fa-fw fa-github"></i>&nbsp;django-distill on GitHub</a>
+
+
+# Support
+
+As an open source library most usage of **django-distill** is self-serve and
+usage should be covered quite well by the documentation on this site, however
+if you encounter something unexpected, a bug or would like to discuss a feature
+please create GitHub issue.
+
+
+# Contributing
+
+All properly formatted and sensible pull requests, issues and comments are
+welcome.
+
+
+# Tests
+
+There is a minimal test suite, you can run it by cloing the repository from
+GitHub, installing the required dependancies in `requirements.txt` then
+execuiting:
+
+
+    $ ./run-tests.py

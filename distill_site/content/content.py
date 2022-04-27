@@ -56,6 +56,9 @@ _extra_css_classes = {
         'is-size-5-tablet',
         'is-size-6-mobile',
         'is-side-note'
+    ],
+    'code': [
+        'is-family-code'
     ]
 }
 

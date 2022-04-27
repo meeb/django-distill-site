@@ -2,6 +2,187 @@ page_title: Deployment
 
 ---
 
-# Deployment
+This page covers how to deploy your Django project with **django-distill** as
+a static site to your web server or CDN once you have
+[<i class="fa-solid fa-fw fa-book-open-reader"></i> integrated](/integration.html)
+it.
 
-this is some content
+
+# The `distill-local` command
+
+The easiest way to use **django-distill** is to build the static output of your
+site to a directory locally and then copy the contents of the output directory
+to your web server.
+
+Once you have wrapped the URLs you want to generate statically you can now
+generate a complete functioning static site with:
+
+    $ ./manage.py distill-local [optional /path/to/export/directory]
+
+Once your site has been created in your output directory you can just upload it
+to the document root directory of your web server, such as your `docs`
+directory for nginx or Apache etc.
+
+Under the hood this simply iterates all URLs registered with `distill_path` and
+generates the pages for them using parts of the Django testing framework to
+spoof requests. Once the site pages have been rendered then files from the
+`STATIC_ROOT` are copied over. Existing files with the same name are replaced
+in the target directory and orphan files are deleted.
+
+Static media files such as images and style sheets are copied from your static
+media directory defined in `STATIC_ROOT`. This means that you will want to run
+`./manage.py collectstatic` **before** you run `./manage.py distill-local`
+if you have made changes to static media. **django-distill** doesn't chain this
+request by design, however you can enable it with the `--collectstatic`
+argument.
+
+`distill-local` supports the following optional arguments:
+
+`--collectstatic`: Automatically run `collectstatic` on your site before
+rendering, this is just a shortcut to save you typing an extra command.
+
+`--quiet`: Disable all output other than asking confirmation questions.
+
+`--force`: Assume 'yes' to all confirmation questions.
+
+`--exclude-staticfiles`: Do not copy any static files at all, only render
+output from Django views.
+
+**Note**  If any of your views contain a Python error then rendering will fail
+then the stack trace will be printed to the terminal and the rendering command
+will exit with a status code of 1.
+
+
+# The `distill-publish` command
+
+If you have configured at least one publishing destination (see below) you can
+use the `distill-publish` command to publish the site to a remote location such
+as an Amazon S3 bucket, a Google Cloud Files container or an Azure Blob Store.
+
+Once you have wrapped the URLs you want to generate statically you can now
+generate a complete functioning static site with:
+
+    $ ./manage.py distill-publish [optional destination here]
+
+This will perform a full synchronisation, removing any remote files that are no
+longer present in the generated static site and uploading any new or changed
+files. The site will be built into a temporary directory locally first when
+publishing which is deleted once the site has been published. Each file will be
+checked that it has been published correctly by requesting it via the
+`PUBLIC_URL` set in your publishing target settings.
+
+`distill-publish` supports the following optional arguments:
+
+`--collectstatic`: Automatically run `collectstatic` on your site before
+rendering, this is just a shortcut to save you typing an extra command.
+
+`--quiet`: Disable all output other than asking confirmation questions.
+
+`--force`: Assume 'yes' to all confirmation questions.
+
+`--exclude-staticfiles`: Do not copy any static files at all, only render
+output from Django views.
+
+**Note** that this means if you use `--force` and `--quiet` that the output
+directory will have all files not part of the site export deleted without any
+confirmation.
+
+**Note**  If any of your views contain a Python error then rendering will fail
+then the stack trace will be printed to the terminal and the rendering command
+will exit with a status code of 1.
+
+
+# The `distill-test-publish` command
+
+    $ ./manage.py distill-test-publish [optional destination here]
+
+This command will connect to your publishing target, authenticate to it,
+upload a randomly named file, verify it exists on the `PUBLIC_URL` and then
+delete it again. Use this to check your publishing settings are correct.
+
+`distill-test-publish` has no arguments.
+
+
+# Optional configuration settings
+
+You can set the following optional `settings.py` variables:
+
+**DISTILL_DIR**: string, default directory to export to. If this is set you can
+use the `distill-local` command with no extra argument. Example:
+
+    DISTILL_DIR = '/path/to/export/directory'
+
+**DISTILL_PUBLISH**: dictionary, like Django's `settings.DATABASES`, supports
+`default`:
+
+    DISTILL_PUBLISH = {
+        'default': {
+            ... options ...
+        },
+        'some-other-target': {
+            ... options ...
+        },
+    }
+
+**DISTILL_SKIP_ADMIN_DIRS**: bool, defaults to `True`
+
+    DISTILL_SKIP_ADMIN_DIRS = True
+
+Set `DISTILL_SKIP_ADMIN_DIRS` to `False` if you want **django-distill** to also
+copy over static files in the `static/admin` directory. Usually, these are not
+required or desired for statically generated sites. The default behaviour is to
+skip static admin files.
+
+
+# Publishing targets
+
+You can automatically publish sites to various supported remote targets through
+backends just like how you can use MySQL, SQLite, PostgreSQL etc. with
+Django by changing the backend database engine. Currently the engines supported
+by **django-distill** are:
+
+**django_distill.backends.amazon_s3**: Publish to an Amazon S3 bucket. Requires
+the Python library `boto3` (`$ pip install boto3`). The bucket must already
+exist (use the AWS control panel). Options:
+
+    'some-s3-container': {
+        'ENGINE': 'django_distill.backends.amazon_s3',
+        'PUBLIC_URL': 'http://.../',
+        'ACCESS_KEY_ID': '...',
+        'SECRET_ACCESS_KEY': '...',
+        'BUCKET': '...',
+    },
+
+**django_distill.backends.google_storage**: Publish to a Google Cloud Storage
+bucket. Requires the Python libraries `google-api-python-client` and
+`google-cloud-storage`
+(`$ pip install google-api-python-client google-cloud-storage`). The bucket
+must already exist and be set up to host a public static website (use the
+Google Cloud control panel). Options:
+
+    'some-google-storage-bucket': {
+        'ENGINE': 'django_distill.backends.google_storage',
+        'PUBLIC_URL': 'https://storage.googleapis.com/[bucket.name.here]/',
+        'JSON_CREDENTIALS': '/path/to/some/credentials.json',
+        'BUCKET': '[bucket.name.here]',
+    },
+
+**django_distill.backends.microsoft_azure_storage**: Publish to a Microsoft
+Azure Blob Storage container. Requires the Python library
+`azure-storage-blob` (`$ pip install azure-storage-blob`). The storage
+account must already exist and be set up to host a public static website
+(use the Microsoft Azure control panel). Options:
+
+    'some-microsoft-storage-account': {
+        'ENGINE': 'django_distill.backends.microsoft_azure_storage',
+        'PUBLIC_URL': 'https://[storage-account-name]...windows.net/',
+        'CONNECTION_STRING': '...',
+    },
+
+Note that each Azure storage account supports one static website using the
+magic container `$web` which is where **django-distill** will attempt to
+publish your site.
+
+You can read some full walk-throughs on using **django-distill** with popular
+automatic CI/CD and static hosting solutions in the 
+[<i class="fa-solid fa-fw fa-book-open"></i> guides](/guides.html).
