@@ -2,8 +2,7 @@
 
 {% block page_title %}Static site generator for Django{% endblock %}
 
-{% block content %}
-
+{% block hero %}
 <div class="triangles">
   <section class="hero container side-pad">
     <div class="hero-body">
@@ -28,6 +27,9 @@
     </div>
   </section>
 </div>
+{% endblock %}
+
+{% block content %}
 
 <section class="container">
   {{ intro|safe }}

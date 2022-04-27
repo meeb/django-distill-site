@@ -17,6 +17,8 @@ a {
     color: $link_colour;
     text-decoration: none;
     border-bottom: 1px $link_underscore_colour dotted;
+    font-weight: bold;
+    font-family: $font_family_bold;
     &:hover {
         color: $link_hover_colour;
     }
@@ -65,18 +67,35 @@ nav.main-nav {
     }
 }
 
+section.hero {
+    border: 0;
+    padding: 0;
+    .title, .subtitle {
+        color: $hero_text_colour;
+        text-shadow: 3px 3px 7px $hero_text_shadow_colour, 
+                     -3px -3px 7px $hero_text_shadow_colour;
+    }
+    .title {
+        padding: 0;
+        margin: 0;
+    }
+    .subtitle {
+        padding-top: 2rem;
+        margin: 0;
+    }
+}
+
+.triangles {
+    background-image: url(/static/images/triangles.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+
 #content {
-    .page-top-border {
-        border-top: 10px $footer_border_colour solid;
-    }
-    .triangles {
-        background-image: url(/static/images/triangles.svg);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-bottom: 10px $nav_border_colour solid;
-        
-    }
+    padding: 0 1rem 0 1rem;
+    border-top: 10px $nav_border_colour solid;
     section {
         padding: 3rem 0 1rem 0;
         &.side-pad {
@@ -88,23 +107,6 @@ nav.main-nav {
     }
     section:not(:last-child) {
         border-bottom: 1px $content_section_border_colour solid;
-    }
-    section.hero {
-        border: 0;
-        padding: 0;
-        .title, .subtitle {
-            color: $hero_text_colour;
-            text-shadow: 3px 3px 7px $hero_text_shadow_colour, 
-                         -3px -3px 7px $hero_text_shadow_colour;
-        }
-        .title {
-            padding: 0;
-            margin: 0;
-        }
-        .subtitle {
-            padding-top: 2rem;
-            margin: 0;
-        }
     }
     .icon-field {
         i {
@@ -135,6 +137,9 @@ nav.main-nav {
     }
     .is-flex {
         display: flex;
+    }
+    .is-side-note {
+        color: $content_side_note_header_colour;
     }
 }
 

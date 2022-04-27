@@ -43,12 +43,21 @@ def static_page_render(name):
     return header, content
 
 
-_h1_classes = [
-    'title',
-    'is-size-3-desktop',
-    'is-size-4-tablet',
-    'is-size-5-mobile'
-]
+_extra_css_classes = {
+    'h1': [
+        'title',
+        'is-size-3-desktop',
+        'is-size-4-tablet',
+        'is-size-5-mobile'
+    ],
+    'h2': [
+        'subtitle',
+        'is-size-4-desktop',
+        'is-size-5-tablet',
+        'is-size-6-mobile',
+        'is-side-note'
+    ]
+}
 
 
 def add_bulma_classes(html):
@@ -57,6 +66,7 @@ def add_bulma_classes(html):
         default CSS classes to HTML rendered automatically from Markdown.
     """
     soup = BeautifulSoup(html, 'html.parser')
-    for tag in soup.find_all('h1'):
-        tag['class'] = tag.get('class', []) + _h1_classes
+    for tag, classes in _extra_css_classes.items():
+        for tag in soup.find_all(tag):
+            tag['class'] = tag.get('class', []) + classes
     return str(soup)

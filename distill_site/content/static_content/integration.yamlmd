@@ -2,6 +2,228 @@ page_title: Integration
 
 ---
 
-# Integration
+This page covers how to integrate **django-distill** into your Django project
+once you have [<i class="fa-solid fa-fw fa-file-import"></i> installed](/install.html)
+it.
 
-this is some content
+
+## <i class="fa-solid fa-triangle-exclamation"></i> Limitations!
+
+**django-distill** generates static pages and therefore only views which allow
+`GET` requests that return an `HTTP 200` status code are supported.
+
+It is assumed you are using URI parameters such as `/blog/123-abc` and not
+querystring parameters such as `/blog?post_id=123&title=abc`. Querystring
+parameters do not make sense for static page generation for obvious reasons.
+
+Additionally With one-off static pages dynamic internationalisation won't work
+so all files are generated using the `LANGUAGE_CODE` value in your
+`settings.py`.
+
+
+# Step 1: wrap your URLs
+
+Open the `urls.py` for any Django project or Django app. Add in an import for
+`django_distill.distill_path` which replaces Django's `django.urls.path`. The
+syntax for `django_distill.distill_path` is identical to `django.urls.path`
+but supports two new keyword arguments, `distill_func` and `distill_file`
+(and an optional third argument that's usually not required,
+`distill_status_codes`).
+
+The `distill_func` argument should be provided with a function or callable
+class that returns an iterable or None. The `distill_file` argument allows you
+to override the URL that would otherwise be generated from the reverse of the
+URL path or regex which allows you to rename URLs like `/example` to any other
+name like `example.html` which may be more useful for static pages. Depending
+on your URLs, both arguments can be optional. As of **django-distill** v0.8 any
+URIs ending in a slash `/` are automatically modified to end in `/index.html`.
+Usage of `distill_func` is covered in step 2.
+
+An example `urls.py` for some static pages for a Django static site would be:
+
+    # Replaces the standard django.urls.path, identical syntax
+    from django_distill import distill_path
+
+    # Import some views from your Django app
+    from app.views import IndexView, PageView
+
+    urlpatterns = [
+
+        # The index URL on /, render this as 'index.html'
+        distill_path('',
+                    IndexView.as_view(),
+                    name='index',
+                    # / is not a valid file name! override it to index.html
+                    distill_file='index.html'),
+
+        # A single static page, render this as 'page.html'
+        distill_path('page.html',
+                    PageView.as_view(),
+                    name='page')
+
+    ]
+
+Your site will still function identically with the above changes. Internally
+the `distill_func` and `distill_file` parameters are removed and the URL is
+passed back to Django for normal processing. This has no runtime performance
+impact as this happens only once upon starting the application.
+
+While most static site projects return HTML from views you can return any data
+such as JSON or binary data and **django-distill** will handle it properly.
+
+
+# Step 2: URLs with parameters
+
+If your URLs have parameters, such as you have a blog with URLs in the format
+of `/post/[slug-of-post]_[date].html` (for example 
+`/post/my-blog-post_2010-10-10.html`) you need to tell **django-distill** which
+pages to render from URL parameters. This is what the optional `distill_func`
+argument is for and a `distill_func` argument is only required when your URL
+has parameters. If required `distill_func` should point to a function which
+returns an iterable (e.g. a list, tuple or yield) which matches the format of
+your URL path.
+
+An example `urls.py` setup for a theoretical blogging app would be:
+
+    # Replaces the standard django.conf.path, identical syntax
+    from django_distill import distill_path
+
+    # Views and models from a theoretical blogging app
+    from blog.views import PostIndex, PostView, PostYear
+    from blog.models import Post
+
+
+    def get_index():
+        # The index URI path, '', contains no parameters, named or otherwise.
+        # You can simply just return nothing here (or not specify a
+        # distill_func at all)
+        return None
+
+    def get_all_blogposts():
+        # This function needs to return an iterable of dictionaries.
+        # Dictionaries are required as the URL this distill function is used by
+        # has named parameters. You can just export a small subset of values
+        # here if you wish to limit what pages will be generated.
+        for post in Post.objects.all():
+            # Note 'blog_id' and 'blog_title' match the URL parameter names
+            yield {'blog_id': post.id, 'blog_title': post.title}
+
+    def get_years():
+        # You can also just return an iterable containing static strings if the
+        # URL only has one argument and you are using positional URL parameters
+        return (2014, 2015)
+        # This is really just shorthand for ((2014,), (2015,))
+
+
+    urlpatterns = [
+
+        # Index URL on /, render this as 'index.html'
+        distill_path('',
+                    PostIndex.as_view(),
+                    name='blog-index',
+                    # Note that for paths which have no paramters
+                    # distill_func is optional
+                    distill_func=get_index,
+                    # / is not a valid file name! override it to index.html
+                    distill_file='index.html'),
+
+        # Blog post page, for example /post/123_my-blog-post.html
+        # using named parameters
+        distill_path('post/<int:blog_id>_<slug:blog_title>.html',
+                    PostView.as_view(),
+                    name='blog-post',
+                    distill_func=get_all_blogposts),
+
+        # Blog posts for a year, for example /posts-by-year/2014.html
+        # using positional parameters
+        distill_path('posts-by-year/<int:year>.html',
+                    PostYear.as_view(),
+                    name='blog-year',
+                    distill_func=get_years)
+
+    ]
+
+If you only want to render some static pages for a view you can just alter the
+URL parameters returned by your `distill_func` function for a URL. For example
+using the above `urls.py` if you only wanted to render blog post pages written
+after 2020 you would modify the Django query in your `distill_func`:
+
+    from datetime import datetime
+
+    posts_after = datetime(year=2020, month=1, day=1)
+
+    def get_all_blogposts():
+        # This function now returns an iterable of dicts but filtered to just
+        # return URL paramters for 2020 or later (assuming the Post model has
+        # a datetime field called post_date)
+        for post in Post.objects.filter(post_date__gte=posts_after):
+            yield {'blog_id': post.id, 'blog_title': post.title}
+
+The functions specified by any `distill_func` kwargs are only ever executed
+when you run either `python manage.py distill-local` or
+`python manage.py distill-publish` on the command line. They have no other
+impact on your Django project which will continue to operate as normal. These
+commands are covered in the deployment documentation.
+
+
+## <i class="fa-solid fa-circle-question"></i> Regular expression URLs
+
+If you prefer to use regex based URL patterns in your Django project or you're
+working on an older project that uses regex URL patterns you can use
+`django_distill.distill_re_path` instead of `django_distill.distill_path`. This
+is identical to Django's `django.urls.re_path`. It's usage is identical to
+`django_distill.distill_path` as detailed above. As an example:
+
+    from django_distill import distill_re_path
+
+    urlpatterns = (
+        distill_re_path(r'^posts-by-year\/(?P<year>[0-9]{4})\.html$''
+                        PostYear.as_view(),
+                        name='blog-year',
+                        distill_func=get_years),
+    )
+
+**django-distill** will attempt to match the URL format support of the version
+if Django you are using, so in very old Django projects using version 1.x you
+may be able to import and use `django_distill.distill_url` which replaces the
+deprectiated `django.urls.url` function. While this is tested and supported for
+older versions of Django it is discouraged in favour of using `distill_path`
+and `distill_re_path` where available.
+
+**django-distill** will mirror whatever your installed version of Django
+supports, therefore the `distill_url` function will cease working once your
+project is upgraded past Django 2.x which depreciated `django.conf.urls.url`
+and `django.urls.url` functions. You can use `distill_re_path` as a drop-in
+replacement.
+
+
+## <i class="fa-solid fa-circle-question"></i> Non-200 status codes
+
+All views rendered by **django-distill** into static pages must return an HTTP
+200 status code. If for any reason you need to render a view as static html
+which does not return an HTTP 200 status code, for example you also want to
+statically generate a 404 page which has a view which (correctly) returns an
+HTTP 404 status code but also returns valid content you need to render to a
+file you can use the `distill_status_codes` optional argument to a view. For
+example:
+
+    from django_distill import distill_path
+    from app.views import Error404View
+
+    urlpatterns = [
+
+        distill_path('error404.html',
+                     Error404View.as_view(),
+                     name='error404',
+                     distill_status_codes=(200, 404))
+
+    ]
+
+The optional `distill_status_codes` argument accepts a tuple of status codes as
+integers which are permitted for the view to return without raising an error.
+By default this is set to `(200,)` but you can override it if you need to for
+your project.
+
+Now you have wrapped your URLs with **django-distill** you can begin with
+[<i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment](/deployment.html)
+of the output of your Django application as a static site.

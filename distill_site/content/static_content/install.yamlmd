@@ -29,7 +29,7 @@ Python package manager setup works for you.
 
 # Step 3: Add to your project
 
-Add `django_distill` to your `INSTALLED_APPS` in the `settings.py` if your
+Add `django_distill` to your `INSTALLED_APPS` in the `settings.py` of your
 Django project:
 
     INSTALLED_APPS = [
