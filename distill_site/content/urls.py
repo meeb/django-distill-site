@@ -11,15 +11,16 @@ def iter_yamlmd_pages():
         content/static_content. You could make this dynamic from a query
         or from a glob() style file matching.
     """
-    return (
-        'deployment',
-        'development',
-        'guide-aws-s3',
-        'guide-cloudflare-pages',
-        'guides',
-        'install',
-        'integration'
-    )
+    for page_name in (
+            'deployment',
+            'development',
+            'guide-aws-s3',
+            'guide-cloudflare-pages',
+            'guides',
+            'install',
+            'integration'
+        ):
+        yield {'page_name': page_name}
 
 
 urlpatterns = [
