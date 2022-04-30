@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
+{% block hero %}
+<div class="triangles">
+  <section class="hero container">
+    <div class="hero-body">
+      <p class="title is-size-1-desktop is-size-2-tablet is-size-3-mobile">
+        Error 404
+      </p>
+      <p class="subtitle is-size-3-desktop is-size-4-tablet is-size-5-mobile">
+        Page not found
+      </p>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
 {% block content %}
-404
+<section class="container">
+  <p>The page you requested does not exist.</p>
+</section>
 {% endblock %}
