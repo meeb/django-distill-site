@@ -12,7 +12,7 @@ django-compressor = "*"
 requests = "*"
 feedparser = "*"
 python-dateutil = "*"
-markdown = "*"
+markdown = "~=3.2.1"
 pyyaml = "*"
 beautifulsoup4 = "*"
 
