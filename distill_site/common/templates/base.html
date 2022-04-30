@@ -1,4 +1,4 @@
-{% load static %}{% load sass_tags %}{% load i18n %}<!doctype html>
+{% load static %}{% load cdnstaticfiles %}{% load sass_tags %}{% load i18n %}<!doctype html>
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
@@ -6,8 +6,8 @@
     <title>{% block page_title %}Static site generator for Django{% endblock %} - Django Distill</title>
     <meta name="description" content="django-distill, a static site generator for Django">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
-    <link rel="stylesheet" href="{% sass_src 'styles/distill.scss' %}">
+    <link rel="icon" type="image/png" href="{% cdnstatic 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% sass_src 'styles/distill.scss' %}?tag={% cdntag 'derp' %}">
   </head>
 
   <body>

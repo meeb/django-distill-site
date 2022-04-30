@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_distill',
+    'django_cachekiller',
     'sass_processor',
     'common',
     'content',

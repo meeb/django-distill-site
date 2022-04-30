@@ -17,6 +17,7 @@ pyyaml = "*"
 beautifulsoup4 = "*"
 importlib-metadata = "*"
 typing-extensions = "*"
+django-cachekiller = "*"
 
 [dev-packages]
 
