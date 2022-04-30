@@ -2,6 +2,7 @@ from pathlib import Path
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
+from content.urls import iter_yamlmd_pages
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ def robots_view(request):
 
 
 def _headers_view(request):
-    content = '\n'.join([
+    content = [
         f'https://:project.pages.dev/*',
         f'  X-Robots-Tag: noindex',
         f'  Location: https://{DOMAIN_NAME}/',
@@ -35,8 +36,17 @@ def _headers_view(request):
         f'  Referrer-Policy: no-referrer',
         f'  Permissions-Policy: document-domain=()',
         f'  Content-Security-Policy: script-src \'self\'; frame-ancestors \'none\';',
-    ])
-    return HttpResponse(content, content_type='text/plain')
+        f'',
+        f'/',
+        f'  Content-Type: text/html',
+        f'/index.html',
+        f'  Content-Type: text/html'
+    ]
+    for page in iter_yamlmd_pages():
+        page_name = page['page_name']
+        content.append(f'/{page_name}')
+        content.append(f'  Content-Type: text/html')
+    return HttpResponse('\n'.join(content), content_type='text/plain')
 
 
 def error404_view(request):
