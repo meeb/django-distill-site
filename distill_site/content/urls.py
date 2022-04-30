@@ -30,7 +30,7 @@ urlpatterns = [
                  name='index',
                  distill_file='index.html'),
 
-    distill_path('<slug:page_name>.html',
+    distill_path('<slug:page_name>',
                  yamlmd_page_view,
                  name='yamlmd_page',
                  distill_func=iter_yamlmd_pages),
