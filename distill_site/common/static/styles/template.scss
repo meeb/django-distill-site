@@ -49,7 +49,6 @@ a {
     }
 }
 
-
 nav.main-nav {
     background-color: $nav_background_colour;
     .navbar-brand {
@@ -66,6 +65,7 @@ nav.main-nav {
     a {
         text-decoration: none;
         color: $nav_link_colour;
+        border: 0;
         &:hover {
             color: $nav_link_hover_colour;
             background-color: $nav_link_background_hover_colour;
@@ -151,8 +151,16 @@ section.hero {
     .is-side-note {
         color: $content_side_note_header_colour;
     }
+    ol {
+        padding: 0 0 1rem 1rem;
+    }
+    li {
+        padding: 0 0 0.5rem 1rem;
+    }
+    li::marker {
+        font-weight: bold;
+    }
 }
-
 
 footer {
     margin-top: 2rem;
