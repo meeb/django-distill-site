@@ -81,23 +81,23 @@ nav.main-nav {
         color: $nav_link_colour;
         border: 0;
         &:hover {
-            color: $nav_link_hover_colour;
-            background-color: $nav_link_background_hover_colour;
+            color: $nav_link_hover_colour !important;
+            background-color: $nav_link_background_hover_colour !important;
         }
     }
     i {
         font-size: 0.95rem;
     }
     .is-active {
-        background-color: $nav_link_active_background_colour;
-        color: $nav_link_active_text_colour;
+        background-color: $nav_link_active_background_colour !important;
+        color: $nav_link_active_text_colour !important;
         &:focus {
-            background-color: $nav_link_active_background_colour;
-            color: $nav_link_active_text_colour;
+            background-color: $nav_link_active_background_colour !important;
+            color: $nav_link_active_text_colour !important;
         }
         &:focus-within {
-            background-color: $nav_link_active_background_colour;
-            color: $nav_link_active_text_colour;
+            background-color: $nav_link_active_background_colour !important;
+            color: $nav_link_active_text_colour !important;
         }
     }
 }
