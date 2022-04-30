@@ -1,8 +1,10 @@
 # django-distill-site
 
-Django powered website for django-distill.com using
+Django powered website for [django-distill.com](https://django-distill.com/)
+using
 [django-distill](https://github.com/meeb/django-distill) to output the sites
-static HTML. The site is automatically built 
+static HTML. The site is automatically built by Cloudflare Pages and deployed
+to the Cloudflare CDN.
 
 Various helper commands are available via the
 [Makefile](https://github.com/meeb/django-distill-site/blob/main/Makefile).
