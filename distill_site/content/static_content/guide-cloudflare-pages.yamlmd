@@ -14,6 +14,15 @@ into a directory:
     $ ./manage.py distill-local [optional /path/to/export/directory]
 
 
+## <i class="fa-solid fa-triangle-exclamation"></i> Python versions on Cloudflare pages
+
+The image Cloudflare pages currently uses to build sites has Python 3.7
+available. This is compatible with Django 3.x but not Django 4.x. Until
+Cloudflare pages supports Python 3.8 or later you will need to pin Django at
+3.x in your project via your package manager such as `pip` to get your site
+to build when you push commits.
+
+
 # Step 1: build command
 
 Once you have a Django site integrated with **django-distill** make a note
