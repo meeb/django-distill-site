@@ -16,6 +16,7 @@ def iter_yamlmd_pages():
         'development',
         'guide-aws-s3',
         'guide-cloudflare-pages',
+        'guides',
         'install',
         'integration'
     )
