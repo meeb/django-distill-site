@@ -42,7 +42,7 @@ option currently is to use GitHub or Gitlab as these have integration with
 Cloudflare Pages. This can be a private repository.
 
 
-# Step 3: Link Cloudflare Pages to your repo
+# Step 3: link Cloudflare Pages to your repo
 
 Log into your Cloudflare account and go to the Pages page. Click connect to
 GitHub or GitLab, whichever you are using to host your site repository. You'll
@@ -53,7 +53,7 @@ Select the repository you've comitted your Django site integrated with
 **django-distill**.
 
 
-# Step 4: Set up the site build
+# Step 4: set up the site build
 
 When you create your Cloudflare Page you'll be asked to give it a name, this
 will be used for the `[sitename].pages.dev` default URL.

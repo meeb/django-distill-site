@@ -13,24 +13,24 @@
   <body>
 
     <nav class="navbar main-nav" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
+      <div class="navbar-brand is-flex-tablet">
         <a class="navbar-item" href="{% url 'content:index' %}">
           <h1>django-distill</h1>
         </a>
       </div>
-      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='install' %}">
+      <a class="navbar-item is-expanded{% if active_page == 'install' %} is-active{% endif %}" href="{% url 'content:yamlmd_page' page_name='install' %}">
         <i class="fa-solid fa-fw fa-file-import"></i>&nbsp;Install
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='integration' %}">
+      <a class="navbar-item is-expanded{% if active_page == 'integration' %} is-active{% endif %}" href="{% url 'content:yamlmd_page' page_name='integration' %}">
         <i class="fa-solid fa-fw fa-puzzle-piece"></i>&nbsp;Integration
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='deployment' %}">
+      <a class="navbar-item is-expanded{% if active_page == 'deployment' %} is-active{% endif %}" href="{% url 'content:yamlmd_page' page_name='deployment' %}">
         <i class="fa-solid fa-fw fa-cloud-arrow-up"></i>&nbsp;Deployment
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='guides' %}">
+      <a class="navbar-item is-expanded{% if active_page == 'guides' %} is-active{% endif %}" href="{% url 'content:yamlmd_page' page_name='guides' %}">
         <i class="fa-solid fa-fw fa-book-open"></i>&nbsp;Guides
       </a>
-      <a class="navbar-item is-expanded" href="{% url 'content:yamlmd_page' page_name='development' %}">
+      <a class="navbar-item is-expanded{% if active_page == 'development' %} is-active{% endif %}" href="{% url 'content:yamlmd_page' page_name='development' %}">
         <i class="fa-solid fa-fw fa-code"></i>&nbsp;Development
       </a>
     </nav>

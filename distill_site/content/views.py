@@ -17,21 +17,10 @@ def index_view(request):
     })
 
 
-def install_view(request):
-    return render(request, 'content/install.html', context={})
-
-
-def integration_view(request):
-    return render(request, 'content/integration.html', context={})
-
-
-def deployment_view(request):
-    return render(request, 'content/deployment.html', context={})
-
-
 def yamlmd_page_view(request, page_name):
     header, content = static_page_render(page_name)
     return render(request, 'content/page.html', context={
+        'active_page': page_name,
         'header': header,
         'content': content
     })

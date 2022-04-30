@@ -16,7 +16,7 @@ It is assumed you are using URI parameters such as `/blog/123-abc` and not
 querystring parameters such as `/blog?post_id=123&title=abc`. Querystring
 parameters do not make sense for static page generation for obvious reasons.
 
-Additionally With one-off static pages dynamic internationalisation won't work
+Additionally with one-off static pages dynamic internationalisation won't work
 so all files are generated using the `LANGUAGE_CODE` value in your
 `settings.py`.
 

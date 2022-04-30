@@ -49,9 +49,23 @@ a {
     }
 }
 
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+    background-color: $nav_link_active_background_colour;
+    color: $nav_link_active_text_colour;
+}
+
 nav.main-nav {
     background-color: $nav_background_colour;
     .navbar-brand {
+        min-height: 0;
+        display: block;
         a {
             background-color: $nav_logo_background_colour;
             &:hover {
@@ -73,6 +87,18 @@ nav.main-nav {
     }
     i {
         font-size: 0.95rem;
+    }
+    .is-active {
+        background-color: $nav_link_active_background_colour;
+        color: $nav_link_active_text_colour;
+        &:focus {
+            background-color: $nav_link_active_background_colour;
+            color: $nav_link_active_text_colour;
+        }
+        &:focus-within {
+            background-color: $nav_link_active_background_colour;
+            color: $nav_link_active_text_colour;
+        }
     }
 }
 
