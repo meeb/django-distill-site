@@ -9,7 +9,7 @@ dev:
 
 
 build:
-    touch distill_site/distill_site/local_settings.py
+	touch distill_site/distill_site/local_settings.py
 	mkdir -p docs
 	mkdir -p distill_site/media
 	mkdir -p distill_site/static
