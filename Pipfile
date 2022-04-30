@@ -16,6 +16,7 @@ markdown = "*"
 pyyaml = "*"
 beautifulsoup4 = "*"
 importlib-metadata = "*"
+typing-extensions = "*"
 
 [dev-packages]
 
