@@ -4,8 +4,7 @@ page_title: Deployment
 
 This page covers how to deploy your Django project with **django-distill** as
 a static site to your web server or CDN once you have
-[<i class="fa-solid fa-fw fa-book-open-reader"></i> integrated](/integration.html)
-it.
+[<i class="fa-solid fa-fw fa-book-open-reader"></i> integrated](/integration) it.
 
 
 # The `distill-local` command

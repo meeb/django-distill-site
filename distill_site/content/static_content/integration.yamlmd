@@ -3,7 +3,7 @@ page_title: Integration
 ---
 
 This page covers how to integrate **django-distill** into your Django project
-once you have [<i class="fa-solid fa-fw fa-file-import"></i> installed](/install.html)
+once you have [<i class="fa-solid fa-fw fa-file-import"></i> installed](/install)
 it.
 
 
@@ -225,5 +225,5 @@ By default this is set to `(200,)` but you can override it if you need to for
 your project.
 
 Now you have wrapped your URLs with **django-distill** you can begin with
-[<i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment](/deployment.html)
+[<i class="fa-solid fa-fw fa-cloud-arrow-up"></i> deployment](/deployment)
 of the output of your Django application as a static site.

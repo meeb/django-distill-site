@@ -5,8 +5,8 @@ page_title: Deploy Django to Cloudflare Pages
 This page is a step by step guide on how to deploy the (static output of) a
 Django project to Cloudflare pages. All of these guides assume you have
 followed the
-[<i class="fa-solid fa-fw fa-file-import"></i> installation](/install.html) and
-[<i class="fa-solid fa-fw fa-puzzle-piece"></i> integration](/integration.html)
+[<i class="fa-solid fa-fw fa-file-import"></i> installation](/install) and
+[<i class="fa-solid fa-fw fa-puzzle-piece"></i> integration](/integration)
 steps to the point where you have a Django site that can be distilled locally
 and the following command works correctly to build a static copy of your site
 into a directory:
