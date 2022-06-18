@@ -185,4 +185,4 @@ publish your site.
 
 You can read some full walk-throughs on using **django-distill** with popular
 automatic CI/CD and static hosting solutions in the 
-[<i class="fa-solid fa-fw fa-book-open"></i> guides](/guides.html).
+[<i class="fa-solid fa-fw fa-book-open"></i> guides](/guides).
