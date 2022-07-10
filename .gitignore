@@ -130,4 +130,5 @@ dmypy.json
 .pyre/
 
 # Project
-distill_site/static
+/distill_site/static
+/docs
