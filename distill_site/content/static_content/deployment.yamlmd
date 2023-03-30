@@ -141,8 +141,8 @@ Django by changing the backend database engine. Currently the engines supported
 by **django-distill** are:
 
 **django_distill.backends.amazon_s3**: Publish to an Amazon S3 bucket. Requires
-the Python library `boto3` (`$ pip install boto3`). The bucket must already
-exist (use the AWS control panel). Options:
+the Python library `boto3` (`$ pip install django-distill[amazon]`). The bucket\
+must already exist (use the AWS control panel). Options:
 
     'some-s3-container': {
         'ENGINE': 'django_distill.backends.amazon_s3',
@@ -154,8 +154,7 @@ exist (use the AWS control panel). Options:
 
 **django_distill.backends.google_storage**: Publish to a Google Cloud Storage
 bucket. Requires the Python libraries `google-api-python-client` and
-`google-cloud-storage`
-(`$ pip install google-api-python-client google-cloud-storage`). The bucket
+`google-cloud-storage` (`$ pip install django-distill[google]`). The bucket
 must already exist and be set up to host a public static website (use the
 Google Cloud control panel). Options:
 
@@ -168,7 +167,7 @@ Google Cloud control panel). Options:
 
 **django_distill.backends.microsoft_azure_storage**: Publish to a Microsoft
 Azure Blob Storage container. Requires the Python library
-`azure-storage-blob` (`$ pip install azure-storage-blob`). The storage
+`azure-storage-blob` (`$ pip install django-distill[microsoft]`). The storage
 account must already exist and be set up to host a public static website
 (use the Microsoft Azure control panel). Options:
 
